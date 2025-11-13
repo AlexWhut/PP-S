@@ -1,5 +1,6 @@
 package multiThreads;
 
+// AtomicLong para contador global seguro entre hilos
 import java.util.concurrent.atomic.AtomicLong;
 
 class ContadorPares extends Thread {
@@ -8,6 +9,8 @@ class ContadorPares extends Thread {
     private AtomicLong contadorGlobal;
     private int numeroHilo;
     
+   
+    // constructor
     public ContadorPares(long inicio, long fin, AtomicLong contadorGlobal, int numeroHilo) {
         this.inicio = inicio;
         this.fin = fin;
@@ -21,7 +24,7 @@ class ContadorPares extends Thread {
         System.out.println("Hilo " + numeroHilo + " iniciado - Rango: " + inicio + " a " + fin);
         
         for (long i = inicio; i <= fin; i++) {
-            if (i % 2 == 0) { // Contar PARES (i % 2 == 0)
+            if (i % 2 == 0) {
                 contadorLocal++;
             }
         }
@@ -34,7 +37,7 @@ class ContadorPares extends Thread {
 public class Main {
     public static void main(String[] args) {
         final long LIMITE = 100_000_000L; // 100 millones en long
-        final int NUM_HILOS = 30;
+        final int NUM_HILOS = 7;
         
         System.out.println("Contador de pares con " + NUM_HILOS + " Threads");
         System.out.println("pares del 1 al " + LIMITE);
@@ -50,14 +53,15 @@ public class Main {
         long rangoHilo = LIMITE / NUM_HILOS;
         
         // Medir tiempo de inicio
-        long tiempoInicio = System.currentTimeMillis();
+        long inicio = System.nanoTime();
         
         // Crear e iniciar los hilos
         for (int i = 0; i < NUM_HILOS; i++) {
-            long inicio = (i * rangoHilo) + 1;
-            long fin = (i == NUM_HILOS - 1) ? LIMITE : (i + 1) * rangoHilo;
+            long inicioRango = (i * rangoHilo) + 1;
+            // Ternario para el rango final del hilo
+            long finRango = (i == NUM_HILOS - 1) ? LIMITE : (i + 1) * rangoHilo;
             
-            hilos[i] = new ContadorPares(inicio, fin, contadorPares, i + 1);
+            hilos[i] = new ContadorPares(inicioRango, finRango, contadorPares, i + 1);
             hilos[i].start();
         }
         
@@ -71,21 +75,21 @@ public class Main {
         }
         
         // Medir tiempo final
-        long tiempoFin = System.currentTimeMillis();
-        long tiempoTotal = tiempoFin - tiempoInicio;
+        long fin = System.nanoTime();
+        long duracion = (fin - inicio) / 1_000_000; // convertir a ms
         
         // Mostrar resultados
         System.out.println();
         System.out.println("Resultado final");
         System.out.println("Total de pares encontrados: " + contadorPares.get());
-        System.out.println("Milisegundos: " + tiempoTotal + " ms (" + (tiempoTotal / 1000.0) + " segundos)");
+        System.out.println("Milisegundos: " + duracion + " ms (" + (duracion / 1000.0) + " segundos)");
         
-        // Verificacion matemática
+        // Verificacion matematica
         long paresEsperados = LIMITE / 2;
         System.out.println("Pares esperados (verificación): " + paresEsperados);
         System.out.println("Resultado correcto: " + (contadorPares.get() == paresEsperados ? "SI" : "NO")); // 
         
-        // Comparacion con versión secuencial
+        // Comparacion con version secuencial
         System.out.println();
         System.out.println("Comparacion con ver secuencial");
         compararConSecuencial(LIMITE);
