@@ -1,0 +1,2 @@
+Este es un archivo de prueba para abrir con Notepad.
+Linea 2.
