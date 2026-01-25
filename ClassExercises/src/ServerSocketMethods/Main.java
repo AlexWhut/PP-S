@@ -6,7 +6,7 @@ import java.net.Socket;
 
 public class Main {
 	public static void main(String[] args) {
-		final int PORT = 5050;
+		final int PORT = 49171;
 		try (ServerSocket serverSocket = new ServerSocket(PORT)) {
 			System.out.println("ServerSocket created.");
 			System.out.println("isBound: " + serverSocket.isBound());
