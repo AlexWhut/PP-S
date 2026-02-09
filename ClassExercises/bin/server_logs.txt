@@ -1,0 +1,10 @@
+[2026-02-09 21:22:29] [ERROR] Udpthreadpool.UDPServerThreadPool - Error en el servidor UDP
+[2026-02-09 21:22:29] [INFO] Udpthreadpool.UDPServerThreadPool - ThreadPool cerrado
+[2026-02-09 21:23:00] [INFO] Udpthreadpool.UDPServerThreadPool - Servidor UDP con ThreadPool en puerto 9876
+[2026-02-09 21:23:17] [INFO] Udpthreadpool.UDPClient - Cliente UDP iniciado
+[2026-02-09 21:23:17] [INFO] Udpthreadpool.UDPServerThreadPool - Paquete recibido de /127.0.0.1:50869
+[2026-02-09 21:23:17] [INFO] Udpthreadpool.ManejadorUDP - Hilo pool-2-thread-1 procesando: Hola servidor UDP
+[2026-02-09 21:23:17] [INFO] Udpthreadpool.UDPClient - Mensaje enviado al servidor: Hola servidor UDP
+[2026-02-09 21:23:18] [INFO] Udpthreadpool.ManejadorUDP - Respuesta enviada a /127.0.0.1:50869
+[2026-02-09 21:23:18] [INFO] Udpthreadpool.UDPClient - Respuesta recibida del servidor
+[2026-02-09 21:23:18] [INFO] Udpthreadpool.UDPClient - Respuesta del servidor: OK -> Hola servidor UDP
